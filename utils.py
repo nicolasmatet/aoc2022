@@ -15,3 +15,22 @@ class OrderedMaxList:
 
     def sum(self):
         return sum(self.values)
+
+
+def stop_iteration(func):
+    """
+    :param func: function that takes an iterator and a memo value.
+    Applies any operation and return new memo until iterator is empty
+    :return: final memo value
+    """
+
+    def wrapper(iterator, memo):
+        while True:
+            try:
+                memo = func(iterator, memo)
+            except RuntimeError:
+                return memo
+            except StopIteration:
+                return memo
+
+    return wrapper
