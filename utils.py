@@ -1,3 +1,7 @@
+from functools import reduce
+from typing import Iterable, TypeVar, Callable
+
+
 class OrderedMaxList:
     def __init__(self, max_items):
         self.max_items = max_items
@@ -34,3 +38,12 @@ def stop_iteration(func):
                 return memo
 
     return wrapper
+
+
+T = TypeVar("T")
+
+
+def count_items(iterable: Iterable[T], where: Callable[[T], bool]):
+    if not where:
+        return reduce(lambda memo, _: memo + 1, iterable, 0)
+    return reduce(lambda memo, _: memo + 1, filter(where, iterable), 0)
