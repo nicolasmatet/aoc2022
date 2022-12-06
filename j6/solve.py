@@ -1,5 +1,3 @@
-
-
 def lines():
     for line in open("input.txt"):
         res = line.strip()
@@ -11,15 +9,16 @@ class Buffer:
         self._buffer = []
         self.max_len = max_len
 
-    def clean_duplicate(self, last_value):
+    def clean_duplicate(self):
+        last_value = self._buffer[-1]
         for idx, value in enumerate(reversed(self._buffer[:-1])):
             if value == last_value:
-                self._buffer = self._buffer[-idx-1:]
+                self._buffer = self._buffer[-idx - 1 :]
                 break
 
     def advance(self, new_char):
         self._buffer.append(new_char)
-        self.clean_duplicate(new_char)
+        self.clean_duplicate()
         return len(self._buffer) == self.max_len
 
 
