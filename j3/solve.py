@@ -12,8 +12,8 @@ def lines():
 
 class Bag:
     def __init__(self, items):
-        self.left = set([c for c in items[: len(items) // 2]])
-        self.right = set([c for c in items[len(items) // 2 :]])
+        self.left = set(c for c in items[: len(items) // 2])
+        self.right = set(c for c in items[len(items) // 2:])
         self.items = set(items)
 
     def get_common(self):
@@ -29,7 +29,7 @@ def solve1():
     total_values = 0
     for bag in lines():
         common_items = bag.get_common()
-        total_values += sum([Bag.get_item_value(item) for item in common_items])
+        total_values += sum(Bag.get_item_value(item) for item in common_items)
     return total_values
 
 
