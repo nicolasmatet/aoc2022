@@ -44,7 +44,7 @@ def pprint(grid, pos=None, rock=None):
 
 class Grid:
     def __init__(self, n):
-        self.unit_of_size = 1000
+        self.unit_of_size = 100000
         self._grid = self.empty_grid()
         self.top = len(self._grid) - 1
         self.total_top = 0
@@ -72,12 +72,9 @@ class Grid:
         pos = np.array([self.top - 4, 2])
         while not stop:
             pos, stop = self.next_step(pos, rock, jets)
-            # if not stop:
-            #     pprint(self._grid, rock=rock, pos=pos)
             if stop:
                 self._grid[pos[0] + rock.shape[0], pos[1] + rock.shape[1]] = "#"
                 self.top = min(self.top, pos[0] - rock.bounds[0] + 1)
-                # pprint(self._grid)
         if self.top < 20:
             new_grid = self.empty_grid()
             new_grid[-self.unit_of_size :, :] = self._grid[: self.unit_of_size]
@@ -103,8 +100,8 @@ def solve2():
 
 if __name__ == "__main__":
     # print(solve_n(2022))
-    # print(solve_n(1000000000000))
-    rocks = list(range(1, 100000, 10000))
-    tops = [solve_n(n) - 1.57*n for n in rocks]
-    plt.plot(rocks, tops)
-    plt.show()
+    print(solve_n(100000))
+    # rocks = list(range(1, 100000, 10000))
+    # tops = [solve_n(n) - 1.57*n for n in rocks]
+    # plt.plot(rocks, tops)
+    # plt.show()
